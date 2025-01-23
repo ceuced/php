@@ -1,0 +1,27 @@
+* {
+    font-family: Arrial, Helvetica, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+dt {
+    font-weight: bold;
+}
+
+.breadcrumbs {
+    margin-left: 10px;
+}
+.breadcrumbs li {
+    display: inline-block;
+}
+
+.breadcrumbs li::after {
+    content: " > ";
+}
