@@ -25,3 +25,12 @@ dt {
 .breadcrumbs li::after {
     content: " > ";
 }
+
+.form {
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px;
+}
+.error {
+    color: red;
+}

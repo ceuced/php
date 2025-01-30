@@ -1,6 +1,6 @@
 <?php 
 require_once 'connection.php';
-$stmt = $pdo->query('SELECT * FROM cars');
+$stmt = $pdo->query('SELECT cars.*, fuel FROM cars LEFT JOIN fuels ON cars.fuel_id = fuels.id');
 $cars = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -13,6 +13,7 @@ $cars = $stmt->fetchAll();
 </head>
 <body>
     <h1>List of Available Cars</h1>
+    <a href="create.php">Add Car</a>
     <table>
         <thead>
             <tr>
@@ -21,6 +22,7 @@ $cars = $stmt->fetchAll();
                 <th>Model</th>
                 <th>Year</th>
                 <th>Price</th>
+                <th>Fuel</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -32,8 +34,11 @@ $cars = $stmt->fetchAll();
                     <td><?php echo $car['model'] ?></td>
                     <td><?php echo $car['year'] ?></td>
                     <td><?php echo $car['price'] ?></td>
+                    <td><?php echo $car['fuel'] ?></td>
                     <td>
-                        <a href="view.php?id=<?php echo $car['id'] ?>">view</a>
+                        <a href="view.php?id=<?php echo $car['id'] ?>">View</a>
+                        <a href="update.php?id=<?php echo $car['id'] ?>">Edit</a>
+                        <a href="delete.php?id=<?php echo $car['id'] ?>">Delete</a>
                     </td>
                 </tr>
             <?php endforeach ?>
