@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ResourceController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('blogs', BlogController::class);
