@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -21,7 +22,9 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $blog = new Blog();
+        return view('blogs.create', ['users' => $users,'blog' => $blog]);
     }
 
     /**
@@ -29,7 +32,16 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:30',
+            'content' => 'required',
+        ]);
+        $blog = new Blog();
+        $blog->title = $request->input('title');
+        $blog->content = $request->input('content');
+        $blog->user_id = $request->input('user_id');
+        $blog->save();
+        return redirect()->route('blogs.show', ['blog' => $blog]);
     }
 
     /**
