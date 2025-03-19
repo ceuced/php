@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,12 +31,8 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        $request->validate([
-            'title' => 'required|max:30',
-            'content' => 'required',
-        ]);
         $blog = new Blog();
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
@@ -47,32 +44,40 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(string $id)
     {
+        $blog = Blog::findOrFail($id);
         return view('blogs.show', ['blog' => $blog]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
-        //
+        $users = User::all();
+        return view('blogs.edit', ['users' => $users,'blog' => $blog]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BlogRequest $request, string $id)
     {
-        //
+        $blog = Blog::find($id);
+        $blog->title = $request->input('title');
+        $blog->content = $request->input('content');
+        $blog->user_id = $request->input('user_id');
+        $blog->save();
+        return redirect()->route('blogs.show', ['blog' => $blog]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return redirect()->route('blogs.index');
     }
 }
