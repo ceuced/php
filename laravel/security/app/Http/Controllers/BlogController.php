@@ -6,6 +6,7 @@ use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -36,7 +37,7 @@ class BlogController extends Controller
         $blog = new Blog();
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
-        $blog->user_id = $request->input('user_id');
+        $blog->user_id = Auth::id();
         $blog->save();
         return redirect()->route('blogs.show', ['blog' => $blog]);
     }
@@ -67,7 +68,7 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
-        $blog->user_id = $request->input('user_id');
+        $blog->user_id = Auth::id();
         $blog->save();
         return redirect()->route('blogs.show', ['blog' => $blog]);
     }

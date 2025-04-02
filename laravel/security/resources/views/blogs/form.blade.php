@@ -12,14 +12,6 @@
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>
-<div class="mb-3">
-    <label for="user_id" class="form-label">Author</label>
-    <select class="form-select" id="user_id" name="user_id">
-        @foreach ($users as $user)
-            <option value="{{ $user->id }}" @selected($user->id === $blog?->user_id)>{{ $user->name }}</option>
-        @endforeach
-    </select>
-</div>
 <div class="col-12">
     <button class="btn btn-primary" type="submit">Save</button>
 </div>
