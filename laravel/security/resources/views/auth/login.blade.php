@@ -65,6 +65,11 @@
                             </div>
                         </div>
                     </form>
+                    <div class="row mt-4">
+                        <a class="btn btn-primary col-md-4 offset-md-4" href="{{  route('google.redirect') }}">
+                            <i class="bi bi-google"></i> Login with Google
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
