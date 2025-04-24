@@ -11,12 +11,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a @class([
-                        'nav-link',
-                        'active' => Route::is('blogs.*')
-                    ]) href="{{ route('blogs.index') }}">Blogs</a>
-                </li>
+                @role('admin|editor')
+                    <li class="nav-item">
+                        <a @class([
+                            'nav-link',
+                            'active' => Route::is('blogs.*')
+                        ]) href="{{ route('blogs.index') }}">Blogs</a>
+                    </li>
+                @endrole
             </ul>
 
             <!-- Right Side Of Navbar -->

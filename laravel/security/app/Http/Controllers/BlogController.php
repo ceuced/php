@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin|editor');
+        $this->middleware('permission:publish blog')->only(['edit', 'update']);
+        $this->middleware('permission:delete blog')->only(['destroy']); 
+    }
     /**
      * Display a listing of the resource.
      */

@@ -7,6 +7,8 @@
         @csrf()
         @method("DELETE")
         <a class="btn btn-primary" href="{{ route('blogs.edit', ['blog' => $blog]) }}" role="button">Edit</a>
-        <button class="btn btn-danger" type="submit">Delete</button>
+        @can('delete blog')
+            <button class="btn btn-danger" type="submit">Delete</button>
+        @endcan
     </form>
 </x-layout>
